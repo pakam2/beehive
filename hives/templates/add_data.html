@@ -3,15 +3,71 @@
 {% block title %} Dodaj ul {% endblock %}
 
 {% block body %}
+<style>
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+</style>
+</style>
 <div class="app-body-wrapper">
   <h1>Pomiary dla ula nr {{ hive_id }}</h1>
   <div class="app-body">
       <form action="" method="post">
           {% csrf_token %}
-          {{form.as_p}}
-          <input type="submit" value="Dodaj">
+          Value: <span id='first_frame_honey_output'></span><br>
+        <div class="slidercontainer">Pierwsza ramka: {{form.first_frame_honey}}</div>
+        <div class="slidercontainer">{{form.first_frame_speck}}</div>
+        <div class="slidercontainer">{{form.first_frame_beebread}}</div>
+        <div class="slidercontainer">{{form.first_frame_worm}}</div>
+        <input type="submit" value="Dodaj">
         </form>
   </div>
 </div>
 
+<script>
+
+var inputContainer = document.getElementsByTagName('input');
+var outputSpan = document.getElementById('first_frame_honey_output');
+for (var i = 0; i < inputContainer.length; i++){
+  if(inputContainer[i].name === 'csrfmiddlewaretoken') {
+
+  }else{
+    inputContainer[i].addEventListener('click', function(){
+      outputSpan.innerText = this.value;
+    });
+  }
+
+}
+</script>
 {% endblock %}

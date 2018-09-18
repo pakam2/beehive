@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from hives.models import HiveModel, HiveDataModel
+from hives.models import HiveModel, FirstHiveDataModel
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -20,18 +20,42 @@ class AddHiveForm(ModelForm):
 class HiveDataForm(ModelForm):
 
     class Meta:
-        model = HiveDataModel
+        model = FirstHiveDataModel
         exclude = ['hive']
 
 
     #Making the 'max' value of the fileds equal to 1
     def __init__(self, *args, **kwargs):
         super(HiveDataForm, self).__init__(*args, **kwargs)
-        self.fields['firstFrame'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
-        self.fields['secondFrame'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
-        self.fields['thirdFrame'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['first_frame_honey'].widget = forms.NumberInput(attrs={'class':'slider', 'type':'range', min:1, 'max': 100, 'id': 'first_frame_honey', 'value': 50})
+        self.fields['first_frame_speck'].widget = forms.NumberInput(attrs={'class':'slider','type':'range', min:1, 'max': 100, 'id': 'first_frame_speck', 'value': 50})
+        self.fields['first_frame_beebread'].widget = forms.NumberInput(attrs={'class':'slider','type':'range', min:1, 'max': 100,'id': 'first_frame_beebread', 'value': 50})
+        self.fields['first_frame_worm'].widget = forms.NumberInput(attrs={'class':'slider','type':'range', min:1, 'max': 100, 'id': 'first_frame_worm', 'value': 50})
 
+        self.fields['second_frame_honey'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['second_frame_speck'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['second_frame_beebread'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['second_frame_worm'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
 
+        self.fields['third_frame_honey'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['third_frame_speck'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['third_frame_beebread'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['third_frame_worm'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+
+        self.fields['fourth_frame_honey'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['fourth_frame_speck'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['fourth_frame_beebread'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['fourth_frame_worm'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+
+        self.fields['fifth_frame_honey'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['fifth_frame_speck'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['fifth_frame_beebread'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['fifth_frame_worm'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+
+        self.fields['sixth_frame_honey'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['sixth_frame_speck'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['sixth_frame_beebread'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
+        self.fields['sixth_frame_worm'].widget = forms.NumberInput(attrs={'step': 0.01, 'min': 0.01, 'max': 1})
 class SignInForm(forms.Form):
 
     login = forms.CharField(label="Login" ,widget=forms.TextInput(attrs={'class' : 'inputField', 'placeholder' : 'Twój login', 'autocomplete' : 'nope'}))

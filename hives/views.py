@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.views import View
 from django.http import HttpResponse
 from hives.forms import AddHiveForm, HiveDataForm, SignInForm, MySignUpForm
-from hives.models import HiveModel, HiveDataModel
+from hives.models import HiveModel, FirstHiveDataModel
 from django.db.models import Sum
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
@@ -142,5 +142,5 @@ class ShowData(LoginRequiredMixin, View):
 
     def get(self, request, num):
         #Query gets all data from a chosen hive
-        dataOfHive = HiveDataModel.objects.all().filter(hive_id=num)
+        dataOfHive = FirstHiveDataModel.objects.all().filter(hive_id=num)
         return render(request, 'show_data.html', {'hive_id': num, 'dataOfHive': dataOfHive})
