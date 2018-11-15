@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from hives.views import MainView, AddHiveView, HiveListView, HiveListDetailedView, AddDataDisplayHives, AddData, ShowListOfHives, ShowData, LoginView, SignUp, LogOutView
+from hives.views import MainView, AddHiveView, HiveListView, HiveListDetailedView, AddDataDisplayHives, \
+     AddDataHiveOneView, AddDataHiveTwoView, AddDataHiveThreeView, AddDataHiveFourView, ShowListOfHives, ShowData, LoginView, SignUp, LogOutView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,7 +29,10 @@ urlpatterns = [
     url(r'^displayHives/$', AddDataDisplayHives.as_view(), name="display-hives"),
     url(r'^historicData/$', ShowListOfHives.as_view(), name="show-hive-list"),
     url(r'^historicData/(?P<num>(\d)+)/$', ShowData.as_view(), name="show-data"),
-    url(r'^addHivesData/(?P<num>(\d)+)/$', AddData.as_view(), name="hive-data-add"),
+    url(r'^addHivesData/(?P<num>(\d)+)/hiver1/$', AddDataHiveOneView.as_view(), name="hive-data-one-add"),
+    url(r'^addHivesData/(?P<num>(\d)+)/hiver2/$', AddDataHiveTwoView.as_view(), name="hive-data-two-add"),
+    url(r'^addHivesData/(?P<num>(\d)+)/hiver3/$', AddDataHiveThreeView.as_view(), name="hive-data-three-add"),
+    url(r'^addHivesData/(?P<num>(\d)+)/hiver4/$', AddDataHiveFourView.as_view(), name="hive-data-four-add"),
     url(r'^detailed/(?P<num>(\d)+)/$', HiveListDetailedView.as_view(), name="detailed"),
 
 ]

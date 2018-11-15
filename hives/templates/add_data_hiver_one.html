@@ -1,0 +1,379 @@
+{% extends 'base.html' %}
+
+{% block title %} Dodaj ul {% endblock %}
+
+{% block body %}
+{% load static %}
+<style>
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+/* .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+} */
+.container {
+   overflow: hidden;
+}
+
+.filterDiv {
+   /* float: left; */
+   /* background-color: #2196F3;
+   color: #ffffff; */
+   /* width: 100px; */
+   /* line-height: 100px;
+   text-align: center; */
+   /* margin: 2px; */
+   display: none; /* Hidden by default */
+}
+
+/* The "show" class is added to the filtered elements */
+.show {
+   display: block;
+}
+
+/* Style the buttons */
+.btn {
+ border: none;
+ outline: none;
+ display: none;
+ padding: 12px 16px;
+ background-color: #f1f1f1;
+ cursor: pointer;
+}
+
+/* Add a light grey background on mouse-over */
+.btn:hover {
+ background-color: #ddd;
+}
+
+/* Add a dark background to the active button */
+.btn.active {
+ background-color: #666;
+ color: white;
+}
+
+
+/* TABS */
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s;
+}
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+
+.myBtnContainer{
+  display: block;
+}
+
+</style>
+<div class="app-body-wrapper">
+  <h1>Pomiary dla ula nr {{ hive_id }}</h1>
+  <div class="app-body">
+
+<!-- Buttons of hives -->
+<!-- ShowFrames -->
+<div class="tab">
+  <button class="tablinks" onclick="location.href='/addHivesData/{{ hive_id }}/hiver1/'">Miodnia 1</button>
+  <button class="tablinks" onclick="location.href='/addHivesData/{{ hive_id }}/hiver2/'">Miodnia 2</button>
+  <button class="tablinks" onclick="location.href='/addHivesData/{{ hive_id }}/hiver3/'">Miodnia 3</button>
+  <button class="tablinks" onclick="location.href='/addHivesData/{{ hive_id }}/hiver4/'">Miodnia 4</button>
+</div>
+
+
+
+<!-- FORM -->
+ <form action="" method="post">
+          {% csrf_token %}
+          Value: <span id='first_frame_honey_output'></span><br>
+ <div class="container">
+   <div id="Miodnia1" class='honeytab'>
+     <!-- Buttons of frames  -->
+     <div class="myBtnContainer">
+       <div class="btn active" onclick="filterSelection('first')"> Pierwsza ramka</div>
+       <div class="btn" onclick="filterSelection('second')"> Druga ramka</div>
+       <div class="btn" onclick="filterSelection('third')"> Trzecia ramka</div>
+       <div class="btn" onclick="filterSelection('fourth')"> Czwarta ramka</div>
+       <div class="btn" onclick="filterSelection('fifth')"> Piąta ramka</div>
+       <div class="btn" onclick="filterSelection('sixth')"> Szósta ramka</div>
+       <div class="btn" onclick="filterSelection('seventh')"> Siódma ramka</div>
+       <div class="btn" onclick="filterSelection('eight')"> Ósma ramka</div>
+       <div class="btn" onclick="filterSelection('ninth')"> Dziewiąta ramka</div>
+       <div class="btn" onclick="filterSelection('tenth')"> Dziesiąta ramka</div>
+     </div>
+     <!-- frames -->
+     <div class="framecontainer">
+       <div class="slidercontainer filterDiv first">{{form.first_frame_honey}}</div>
+       <div class="slidercontainer filterDiv first">{{form.first_frame_speck}}</div>
+       <div class="slidercontainer filterDiv first">{{form.first_frame_beebread}}</div>
+       <div class="slidercontainer filterDiv first">{{form.first_frame_worm}}</div>
+
+       <div class="slidercontainer filterDiv second">{{form.second_frame_honey}}</div>
+       <div class="slidercontainer filterDiv second">{{form.second_frame_speck}}</div>
+       <div class="slidercontainer filterDiv second">{{form.second_frame_beebread}}</div>
+       <div class="slidercontainer filterDiv second">{{form.second_frame_worm}}</div>
+
+       <div class="slidercontainer filterDiv third">{{form.third_frame_honey}}</div>
+       <div class="slidercontainer filterDiv third">{{form.third_frame_speck}}</div>
+       <div class="slidercontainer filterDiv third">{{form.third_frame_beebread}}</div>
+       <div class="slidercontainer filterDiv third">{{form.third_frame_worm}}</div>
+
+       <div class="slidercontainer filterDiv fourth">{{form.fourth_frame_honey}}</div>
+       <div class="slidercontainer filterDiv fourth">{{form.fourth_frame_speck}}</div>
+       <div class="slidercontainer filterDiv fourth">{{form.fourth_frame_beebread}}</div>
+       <div class="slidercontainer filterDiv fourth">{{form.fourth_frame_worm}}</div>
+
+       <div class="slidercontainer filterDiv fifth">{{form.fifth_frame_honey}}</div>
+       <div class="slidercontainer filterDiv fifth">{{form.fifth_frame_speck}}</div>
+       <div class="slidercontainer filterDiv fifth">{{form.fifth_frame_beebread}}</div>
+       <div class="slidercontainer filterDiv fifth">{{form.fifth_frame_worm}}</div>
+
+       <div class="slidercontainer filterDiv sixth">{{form.sixth_frame_honey}}</div>
+       <div class="slidercontainer filterDiv sixth">{{form.sixth_frame_speck}}</div>
+       <div class="slidercontainer filterDiv sixth">{{form.sixth_frame_beebread}}</div>
+       <div class="slidercontainer filterDiv sixth">{{form.sixth_frame_worm}}</div>
+
+       <div class="slidercontainer filterDiv seventh">{{form.seventh_frame_honey}}</div>
+       <div class="slidercontainer filterDiv seventh">{{form.seventh_frame_speck}}</div>
+       <div class="slidercontainer filterDiv seventh">{{form.seventh_frame_beebread}}</div>
+       <div class="slidercontainer filterDiv seventh">{{form.seventh_frame_worm}}</div>
+
+       <div class="slidercontainer filterDiv eight">{{form.eight_frame_honey}}</div>
+       <div class="slidercontainer filterDiv eight">{{form.eight_frame_speck}}</div>
+       <div class="slidercontainer filterDiv eight">{{form.eight_frame_beebread}}</div>
+       <div class="slidercontainer filterDiv eight">{{form.eight_frame_worm}}</div>
+
+       <div class="slidercontainer filterDiv ninth">{{form.ninth_frame_honey}}</div>
+       <div class="slidercontainer filterDiv ninth">{{form.ninth_frame_speck}}</div>
+       <div class="slidercontainer filterDiv ninth">{{form.ninth_frame_beebread}}</div>
+       <div class="slidercontainer filterDiv ninth">{{form.ninth_frame_worm}}</div>
+
+       <div class="slidercontainer filterDiv tenth">{{form.tenth_frame_honey}}</div>
+       <div class="slidercontainer filterDiv tenth">{{form.tenth_frame_speck}}</div>
+       <div class="slidercontainer filterDiv tenth">{{form.tenth_frame_beebread}}</div>
+       <div class="slidercontainer filterDiv tenth">{{form.tenth_frame_worm}}</div>
+  </div>
+</div>
+
+
+
+</div>
+          <input type="submit" value="Dodaj">
+        </form>
+  </div>
+</div>
+
+
+<script>
+
+// Displays values on site in "span" with Id "first_frame_honey_output"
+var inputContainer = document.getElementsByTagName('input');
+var outputSpan = document.getElementById('first_frame_honey_output');
+for (var i = 0; i < inputContainer.length; i++){
+  if(inputContainer[i].name === 'csrfmiddlewaretoken') {
+
+  }else{
+    inputContainer[i].addEventListener('click', function(){
+      outputSpan.innerText = this.value;
+    });
+  }
+
+}
+
+
+// TABS ON SITE
+//Shows frames of first tab
+showFrames('', 'Miodnia1');
+function showFrames(event, tab){
+  RemoveClass('show');
+  var flag = false;
+  var selectedTab = document.getElementById(tab);
+  var btnCon = selectedTab.querySelector('.myBtnContainer');
+  var btns = btnCon.getElementsByClassName('btn');
+  //Loops through frame buttons in a tab
+  for (var i = 0; i < btns.length; i++){
+   btns[i].style.display = 'inline-block';
+ }
+  //Calls a function to deactivate (change the 'display' value) frames buttons in the inactive tabs
+  hideInactiveFrames(tab);
+
+};
+//Hides tabs
+function hideInactiveFrames(activeTab){
+  var arrTabs = [];
+  var deactiveTab;
+  var keepActive = document.getElementById(activeTab);
+  var tabs = document.getElementsByClassName('honeytab');
+  //Creates a table with tabs to inactive
+  for (var i = 0;i < tabs.length; i++){
+    if(tabs[i].id !== activeTab){
+      arrTabs.push(tabs[i].id);
+    };
+  }
+  //Loops through tabs and hides frame buttons
+    for(var i = 0; i < arrTabs.length; i++){
+       deactiveTab = document.getElementById(arrTabs[i]);
+       deactiveBtns = deactiveTab.getElementsByClassName('btn');
+       //Loops through frame buttons in a tab
+       for (var j = 0; j < deactiveBtns.length; j++){
+        deactiveBtns[j].style.display = 'none';
+     }
+    }
+
+
+};
+
+//Displays ranges on site
+function filterSelection(arrElement){
+  var tabName,
+      btn,
+      filterCon;
+  //First remove all elements with class 'show'
+  RemoveClass('show');
+
+  //Get elements with 'myBtnContainer' class
+  var btnCon = document.getElementsByClassName('myBtnContainer');
+  //Checks which elemnets of 'myBtnContainer' class have 'display' not equal to 'none' (which are visiable on site)
+  //And return the active 'tab' name
+  for (var i = 0; i < btnCon.length; i++){
+    // console.log(btnCon[i]);
+    btn = btnCon[i].getElementsByClassName('btn');
+    for (var j =0; j < btn.length; j++){
+      if (btn[j].style.display != 'none'){
+        tabName = btnCon[i].parentNode;
+        break;
+      }
+    }
+
+  }
+  filterCon = tabName.getElementsByClassName('filterDiv');
+  // console.log(filterCon);
+  for (var i = 0; i < filterCon.length; i++){
+    // console.log(filterCon[i]);
+    // ReomveClass(filterCon[i], 'show');
+    if(filterCon[i].className.indexOf(arrElement) > -1) AddClass(tabName, i, 'show');
+  }
+  // var frames = selectedTab.getElementsByClassName('filterDiv');
+  // console.log(frames);
+}
+
+
+// Show filtered elements
+function AddClass(tabName, index, classN) {
+  var ranges,
+      arr1,
+      arr2;
+  var filterCon = tabName.getElementsByClassName('filterDiv');
+  //Removes the 'show' class (classN), to hide ranges
+  // Loop gets elements to which the 'show' class (classN) will be added
+  for (var i =0; i < filterCon.length; i++){
+    if (i === index){
+      ranges = filterCon[i];
+      break;
+    }
+  }
+  arr1 = ranges.className.split(" ");
+  for(var j =0; j < arr1.length; j++){
+    ranges.className += " " + classN;
+  }
+
+}
+
+// Hide elements that are not selected
+function RemoveClass(name) {
+  //Function removes a class from the page
+  var arr1;
+  var showElements = document.getElementsByClassName(name);
+
+  while(showElements.length > 0){
+    showElements = document.getElementsByClassName(name);
+    for(var i = 0; i < showElements.length; i ++){
+      element = showElements[i];
+      arr1 = element.className.split(" ");
+      while (arr1.indexOf(name) > -1){
+          arr1.pop(name);
+      }
+
+       z = arr1.join(" ");
+       element.className = z;
+       // console.log(element.className);
+    }
+   }
+}
+
+
+
+
+
+
+</script>
+{% endblock %}

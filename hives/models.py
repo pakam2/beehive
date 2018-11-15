@@ -7,7 +7,7 @@ from django.contrib.auth.models import User, AbstractUser
 
 class HiveModel(models.Model):
 
-    numberOfHive = models.IntegerField(null=False, unique=True)
+    numberOfHive = models.IntegerField(null=False)
     date = models.DateTimeField(auto_now_add=True)
     additional_info = models.CharField(max_length=500, blank=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -64,10 +64,12 @@ class FirstHiveDataModel(models.Model):
     tenth_frame_beebread = models.DecimalField(max_digits=3, decimal_places=0, blank=True, null=True)
     tenth_frame_worm = models.DecimalField(max_digits=3, decimal_places=0, blank=True, null=True)
 
+
+    hiver_id = models.IntegerField(default=1, blank=True, null=True)
     addDate = models.DateField(auto_now_add=True)
     motherBee = models.BooleanField(default=False)
     hive = models.ForeignKey(HiveModel, on_delete=models.CASCADE)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.IntegerField(default=1, blank=True, null=True)
 
 class SecondHiveDataModel(models.Model):
 
@@ -121,10 +123,11 @@ class SecondHiveDataModel(models.Model):
     tenth_frame_beebread = models.DecimalField(max_digits=3, decimal_places=0, blank=True, null=True)
     tenth_frame_worm = models.DecimalField(max_digits=3, decimal_places=0, blank=True, null=True)
 
+    hiver_id = models.IntegerField(default=2, blank=True, null=True)
     addDate = models.DateField(auto_now_add=True)
     motherBee = models.BooleanField(default=False)
     hive = models.ForeignKey(HiveModel, on_delete=models.CASCADE)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.IntegerField(default=1, blank=True, null=True)
 
 class ThirdHiveDataModel(models.Model):
 
@@ -178,10 +181,11 @@ class ThirdHiveDataModel(models.Model):
     tenth_frame_beebread = models.DecimalField(max_digits=3, decimal_places=0, blank=True, null=True)
     tenth_frame_worm = models.DecimalField(max_digits=3, decimal_places=0, blank=True, null=True)
 
+    hiver_id = models.IntegerField(default=3, blank=True, null=True)
     addDate = models.DateField(auto_now_add=True)
     motherBee = models.BooleanField(default=False)
     hive = models.ForeignKey(HiveModel, on_delete=models.CASCADE)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.IntegerField(default=1, blank=True, null=True)
 
 class FourthHiveDataModel(models.Model):
 
@@ -235,7 +239,8 @@ class FourthHiveDataModel(models.Model):
     tenth_frame_beebread = models.DecimalField(max_digits=3, decimal_places=0, blank=True, null=True)
     tenth_frame_worm = models.DecimalField(max_digits=3, decimal_places=0, blank=True, null=True)
 
+    hiver_id = models.IntegerField(default=4, blank=True, null=True)
     addDate = models.DateField(auto_now_add=True)
     motherBee = models.BooleanField(default=False)
     hive = models.ForeignKey(HiveModel, on_delete=models.CASCADE)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.IntegerField(default=1, blank=True, null=True)

@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.core.urlresolvers import reverse
 from django.views import View
 from django.http import HttpResponse
-from hives.forms import AddHiveForm, HiveDataForm, SignInForm, MySignUpForm
+from hives.forms import AddHiveForm, HiveDataFormOne, HiveDataFormTwo, HiveDataFormThree, HiveDataFormFour, SignInForm, MySignUpForm
 from hives.models import HiveModel, FirstHiveDataModel
 from django.db.models import Sum
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -59,6 +59,8 @@ class LogOutView(View):
 class MainView(LoginRequiredMixin, View):
 
     def get(self, request):
+        print(request.user.id)
+        print(request.user.username)
         return render(request, 'main.html')
 
 
@@ -83,8 +85,7 @@ class HiveListView( LoginRequiredMixin, View):
     #List of all hives
 
     def get(self, request):
-        ctx = HiveModel.objects.all()
-
+        ctx = HiveModel.objects.all().filter(owner=request.user.id)
         return render(request, 'hive_list.html', {'ctx': ctx})
 
 
@@ -102,39 +103,101 @@ class AddDataDisplayHives(LoginRequiredMixin, View):
 
     #Displays list of all hives to which we can add data
     def get(self, request):
-        ctx = HiveModel.objects.all()
+        ctx = HiveModel.objects.all().filter(owner=request.user.id)
         return render(request, 'display_hives.html', {'ctx': ctx})
 
     def post(self, request):
-        ctx = HiveModel.objects.all()
+        ctx = HiveModel.objects.all().filter(owner=request.user.id)
         return render(request, 'display_hives.html', {'ctx': ctx})
 
 
-class AddData(LoginRequiredMixin, View):
+class AddDataHiveOneView(LoginRequiredMixin, View):
 
     #Addiing data to a specific hive
     def get(self, request, num):
-        form = HiveDataForm()
-        return render(request, 'add_data.html', {'form': form, 'hive_id': num})
+        form = HiveDataFormOne()
+        return render(request, 'add_data_hiver_one.html', {'form': form, 'hive_id': num})
 
     def post(self, request, num):
-        form = HiveDataForm(request.POST)
+        form = HiveDataFormOne(request.POST)
         if form.is_valid():
-            print(form)
-            #Adding a field to a HiveDataModel that was excluded from in forms.py
             form = form.save(commit=False)
             form.hive_id = int(num)
+            form.owner = request.user.id
             form.save()
-            return render(request,'display_hives.html', {'ctx': HiveModel.objects.all(), 'success': 'asaa'} )
+            return render(request,'display_hives.html', {'ctx': HiveModel.objects.all().filter(owner=request.user.id), 'success': 'Data added'} )
         else:
-            return HttpResponse("Nie dodno danych")
+            #For error handling
+            return render_to_response('my_template.html', {'form': form})
+
+class AddDataHiveTwoView(LoginRequiredMixin, View):
+    
+    #Addiing data to a specific hive
+    def get(self, request, num):
+        form = HiveDataFormTwo()
+        # formTwo = HiveDataFormTwo()
+        # formFour = HiveDataFormFour()
+        # formThree = HiveDataFormThree()
+        return render(request, 'add_data_hiver_two.html', {'form': form, 'hive_id': num})
+
+    def post(self, request, num):
+        form = HiveDataFormTwo(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.hive_id = int(num)
+            form.owner = request.user.id
+            form.save()
+            return render(request,'display_hives.html', {'ctx': HiveModel.objects.all().filter(owner=request.user.id), 'success': 'Data added'} )
+        else:
+            #For error handling
+            return render_to_response('my_template.html', {'form': form})
+
+
+class AddDataHiveThreeView(LoginRequiredMixin, View):
+    
+    #Addiing data to a specific hive
+    def get(self, request, num):
+        form = HiveDataFormThree()
+        return render(request, 'add_data_hiver_three.html', {'form': form, 'hive_id': num})
+
+    def post(self, request, num):
+        form = HiveDataFormThree(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.hive_id = int(num)
+            form.owner = request.user.id
+            form.save()
+            return render(request,'display_hives.html', {'ctx': HiveModel.objects.all().filter(owner=request.user.id), 'success': 'Data added'} )
+        else:
+            #For error handling
+            return render_to_response('my_template.html', {'form': form})
+
+class AddDataHiveFourView(LoginRequiredMixin, View):
+    
+    #Addiing data to a specific hive
+    def get(self, request, num):
+        form = HiveDataFormFour()
+        return render(request, 'add_data_hiver_four.html', {'form': form, 'hive_id': num})
+
+    def post(self, request, num):
+        form = HiveDataFormFour(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.hive_id = int(num)
+            form.owner = request.user.id
+            form.save()
+            return render(request,'display_hives.html', {'ctx': HiveModel.objects.all().filter(owner=request.user.id), 'success': 'Data added'} )
+        else:
+            #For error handling
+            return render_to_response('my_template.html', {'form': form})
+
 
 class ShowListOfHives(LoginRequiredMixin, View):
 
     #displays a list of hives
     #In this view you can choose a hive and see the statistics
     def get(self, request):
-        ctx = HiveModel.objects.all()
+        ctx = HiveModel.objects.all().filter(owner=request.user.id)
         return render(request, 'historic_data.html', {'ctx':ctx})
 
 
