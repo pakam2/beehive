@@ -6,7 +6,7 @@ __pycache__/
 # C extensions
 *.so
 dont_send_to_git.py
-.vscode
+.vscode/
 # Distribution / packaging
 .Python
 build/
