@@ -4,17 +4,18 @@ from django.views import View
 from django.http import HttpResponse
 from hives.forms import AddHiveForm, HiveDataFormOne, HiveDataFormTwo, HiveDataFormThree, HiveDataFormFour, SignInForm, MySignUpForm
 from hives.models import HiveModel, FirstHiveDataModel
-from django.db.models import Sum
+from django.db.models import Sum, Max
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib import messages
+
 
 # Create your views here.
 class SignUp(View):
 
     def get(self, request):
-        #form = UserCreationForm()
         form = MySignUpForm()
         return render(request, 'signup.html', {'form': form})
 
@@ -36,7 +37,6 @@ class LoginView(View):
             return redirect('/main')
         else:
             ctx = SignInForm()
-            #User.objects.create_user(username="jeden", password="jeden")
             return render(request, 'login.html', {'ctx': ctx})
 
     def post(self, request):
@@ -52,28 +52,30 @@ class LoginView(View):
 class LogOutView(View):
 
     def get(self, request):
+        messages.info(request, "Wylogowałeś się")
         logout(request)
-        return HttpResponse("Wylogowałeś się")
+        return redirect('/')
 
 
 class MainView(LoginRequiredMixin, View):
 
     def get(self, request):
-        print(request.user.id)
-        print(request.user.username)
         return render(request, 'main.html')
 
 
-class AddHiveView(LoginRequiredMixin, View):
-    #View to add a new hive
+class AddNewHiveView(LoginRequiredMixin, View):
 
     def get(self, request):
         form = AddHiveForm()
-        return render(request, 'add_hive.html', {'form': form})
+        newHiveNumber = HiveModel.objects.all().aggregate(Max('numberOfHive'))
+        return render(request, 'add_new_hive.html', {'form': form, 'newHiveNumber': newHiveNumber['numberOfHive__max'] + 1})
 
     def post(self, request):
         form = AddHiveForm(request.POST)
         if form.is_valid():
+            form = form.save(commit=False)
+            form.owner_id  = request.user.id
+            form.numberOfHive = HiveModel.objects.all().aggregate(Max('numberOfHive'))['numberOfHive__max'] + 1
             form.save()
             return redirect('/main')
         else:

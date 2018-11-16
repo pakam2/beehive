@@ -8,6 +8,7 @@
   <div class="app-body">
     <form action="" method="post">
         {% csrf_token %}
+        <h2>Nowy ul będzie miał numer {{newHiveNumber}}</h2>
         {{form.as_p}}
         <input type="submit" value="dodaj">
       </form>

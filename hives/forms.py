@@ -9,13 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 class AddHiveForm(ModelForm):
     class Meta:
         model = HiveModel
-        fields = '__all__'
-
-    #Making the 'max' value of the field equal to 1
-    def __init__(self, *args, **kwargs):
-        super(AddHiveForm,self).__init__(*args, **kwargs)
-        self.fields['numberOfHive'].widget = forms.NumberInput(attrs={'step':1, 'min':1})
-
+        fields = ['additional_info']
 
 class HiveDataFormOne(ModelForm):
 
