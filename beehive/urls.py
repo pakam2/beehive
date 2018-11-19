@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from hives.views import MainView, AddNewHiveView, HiveListView, HiveListDetailedView, AddDataDisplayHives, \
-     AddDataHiveOneView, AddDataHiveTwoView, AddDataHiveThreeView, AddDataHiveFourView, ShowListOfHives, ShowData, LoginView, SignUp, LogOutView
+from hives.views import MainView, AddNewHiveView, HiveList,  DeleteHiveView, AddDataDisplayHives, \
+     AddDataHiveOneView, AddDataHiveTwoView, AddDataHiveThreeView, AddDataHiveFourView, \
+     ShowListOfHives, ShowData, LoginView, SignUp, LogOutView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,9 +25,9 @@ urlpatterns = [
     url(r'^logout/', LogOutView.as_view(), name="logout"),
     url(r'^signup/', SignUp.as_view(), name="signup"),
     url(r'^main/$', MainView.as_view(), name="main"),
-
     url(r'^addNewHive/$', AddNewHiveView.as_view(), name="add-hive"),
-    url(r'^hiveList/$', HiveListView.as_view(), name="hive-list"),
+    url(r'^listOfHives/$', HiveList.as_view(), name='hive-list'),
+    url(r'^deleteHive/(?P<pk>(\d)+)$', DeleteHiveView.as_view(), name="delete-hive"),
     url(r'^displayHives/$', AddDataDisplayHives.as_view(), name="display-hives"),
     url(r'^historicData/$', ShowListOfHives.as_view(), name="show-hive-list"),
     url(r'^historicData/(?P<num>(\d)+)/$', ShowData.as_view(), name="show-data"),
@@ -34,6 +35,5 @@ urlpatterns = [
     url(r'^addHivesData/(?P<num>(\d)+)/hiver2/$', AddDataHiveTwoView.as_view(), name="hive-data-two-add"),
     url(r'^addHivesData/(?P<num>(\d)+)/hiver3/$', AddDataHiveThreeView.as_view(), name="hive-data-three-add"),
     url(r'^addHivesData/(?P<num>(\d)+)/hiver4/$', AddDataHiveFourView.as_view(), name="hive-data-four-add"),
-    url(r'^detailed/(?P<num>(\d)+)/$', HiveListDetailedView.as_view(), name="detailed"),
 
 ]

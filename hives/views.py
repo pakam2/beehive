@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, render_to_response
 from django.core.urlresolvers import reverse
 from django.views import View
+from django.urls import reverse_lazy
 from django.http import HttpResponse
 from hives.forms import AddHiveForm, HiveDataFormOne, HiveDataFormTwo, HiveDataFormThree, HiveDataFormFour, SignInForm, MySignUpForm
 from hives.models import HiveModel, FirstHiveDataModel
-from django.db.models import Sum, Max
+from django.db.models import Sum, Max, Count
+from django.views.generic.edit import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
@@ -67,39 +69,35 @@ class AddNewHiveView(LoginRequiredMixin, View):
 
     def get(self, request):
         form = AddHiveForm()
-        newHiveNumber = HiveModel.objects.all().aggregate(Max('numberOfHive'))
-        return render(request, 'add_new_hive.html', {'form': form, 'newHiveNumber': newHiveNumber['numberOfHive__max'] + 1})
+        newHiveNumber = HiveModel.objects.all().filter(owner=request.user.id).aggregate(Count('numberOfHive'))
+        return render(request, 'add_new_hive.html', {'form': form, 'newHiveNumber': newHiveNumber['numberOfHive__count'] + 1})
 
     def post(self, request):
         form = AddHiveForm(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
             form.owner_id  = request.user.id
-            form.numberOfHive = HiveModel.objects.all().aggregate(Max('numberOfHive'))['numberOfHive__max'] + 1
+            form.numberOfHive = HiveModel.objects.all().filter(owner=request.user.id).aggregate(Count('numberOfHive'))['numberOfHive__count'] + 1
             form.save()
             return redirect('/main')
         else:
             return HttpResponse("Ul o tym numerze już istnieje")
+1
 
-
-class HiveListView( LoginRequiredMixin, View):
-
-    #List of all hives
+class HiveList(LoginRequiredMixin, View):
 
     def get(self, request):
-        ctx = HiveModel.objects.all().filter(owner=request.user.id)
-        return render(request, 'hive_list.html', {'ctx': ctx})
+        form = HiveModel.objects.all().filter(owner=request.user.id)
+        return render(request, 'hive_list.html', {'form': form})
 
 
-class HiveListDetailedView(LoginRequiredMixin, View):
+class DeleteHiveView(LoginRequiredMixin, DeleteView):
 
-    #Detailed view of a specific hive
-
-    def get(self, request, num):
-
-        hiveInformation = HiveModel.objects.all().filter(numberOfHive=num)
-        return render(request, 'detailed.html', {'ul_id': num,
-                                                 'ul_info': hiveInformation,})
+    
+    model = HiveModel
+    success_url = reverse_lazy('main')
+    
+ 
 
 class AddDataDisplayHives(LoginRequiredMixin, View):
 

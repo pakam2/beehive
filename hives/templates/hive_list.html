@@ -6,8 +6,8 @@
 <div class="app-body-wrapper">
     <h1>Lista uli</h1>
     <div class="app-body">
-        {% for hive in ctx %}
-        <a href="/detailed/{{hive.numberOfHive}}/">Ul nr {{hive.numberOfHive}}</a><br>
+        {% for hive in form %}
+        Ul nr {{hive.numberOfHive}}<a href="/deleteHive/{{hive.pk}}">Usuń</a> {{hive.p}}<br>
         
         {% endfor %}
     </div>
