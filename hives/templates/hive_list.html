@@ -7,8 +7,9 @@
     <h1>Lista uli</h1>
     <div class="app-body">
         {% for hive in form %}
-        Ul nr {{hive.numberOfHive}}<a href="/deleteHive/{{hive.pk}}">Usuń</a> {{hive.p}}<br>
         
+        Ul nr {{hive.numberOfHive}}<a href="/deleteHive/{{hive.pk}}">Usuń</a> {{hive.p}}<br>
+
         {% endfor %}
     </div>
 </div>

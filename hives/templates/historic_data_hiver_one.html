@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Miodnia 1{% endblock %}
+{% block body %}
+<style>
+table, th, td {
+    border:1px solid black;
+
+}
+</style>
+<div class="app-body-wrapper">
+    <h1>Miodnia 1</h1>
+    <table>
+
+        <tr><td>Data</td><td colspan="4">Ramka 1</td><td colspan="4">Ramka 2</td><td colspan="4">Ramka 3</td><td colspan="4">Ramka 4</td><td colspan="4">Ramka 5</td> <td colspan="4">Ramka 6</td> <td colspan="4">Ramka 7</td colspan="4"> <td colspan="4">Ramka 8</td><td colspan="4">Ramka 9</td><td colspan="4">Ramka 10</td></tr>
+        {% for hiveOne in form %}
+        <tr><td>{{hiveOne.addDate}}</td>
+            <td>{{hiveOne.first_frame_honey}}</td><td>{{hiveOne.first_frame_speck}}</td><td>{{hiveOne.first_frame_beebread}}</td><td>{{hiveOne.first_frame_worm}}</td>
+            <td>{{hiveOne.second_frame_honey}}</td><td>{{hiveOne.second_frame_speck}}</td><td>{{hiveOne.second_frame_beebread}}</td><td>{{hiveOne.second_frame_worm}}</td>
+            <td>{{hiveOne.third_frame_honey}}</td><td>{{hiveOne.third_frame_speck}}</td><td>{{hiveOne.third_frame_beebread}}</td><td>{{hiveOne.third_frame_worm}}</td>
+            <td>{{hiveOne.fourth_frame_honey}}</td><td>{{hiveOne.fourth_frame_speck}}</td><td>{{hiveOne.fourth_frame_beebread}}</td><td>{{hiveOne.fourth_frame_worm}}</td>
+            <td>{{hiveOne.fifth_frame_honey}}</td><td>{{hiveOne.fifth_frame_speck}}</td><td>{{hiveOne.fifth_frame_beebread}}</td><td>{{hiveOne.fifth_frame_worm}}</td>
+            <td>{{hiveOne.sixth_frame_honey}}</td><td>{{hiveOne.sixth_frame_speck}}</td><td>{{hiveOne.sixth_frame_beebread}}</td><td>{{hiveOne.sixth_frame_worm}}</td>
+            <td>{{hiveOne.seventh_frame_honey}}</td><td>{{hiveOne.seventh_frame_speck}}</td><td>{{hiveOne.seventh_frame_beebread}}</td><td>{{hiveOne.seventh_frame_worm}}</td>
+            <td>{{hiveOne.eight_frame_honey}}</td><td>{{hiveOne.eight_frame_speck}}</td><td>{{hiveOne.eight_frame_beebread}}</td><td>{{hiveOne.eight_frame_worm}}</td>
+            <td>{{hiveOne.ninth_frame_honey}}</td><td>{{hiveOne.ninth_frame_speck}}</td><td>{{hiveOne.ninth_frame_beebread}}</td><td>{{hiveOne.ninth_frame_worm}}</td>
+            <td>{{hiveOne.tenth_frame_honey}}</td><td>{{hiveOne.tenth_frame_speck}}</td><td>{{hiveOne.tenth_frame_beebread}}</td><td>{{hiveOne.tenth_frame_worm}}</td>
+
+
+        </tr>   
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

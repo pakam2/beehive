@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from hives.views import MainView, AddNewHiveView, HiveList,  DeleteHiveView, AddDataDisplayHives, \
      AddDataHiveOneView, AddDataHiveTwoView, AddDataHiveThreeView, AddDataHiveFourView, \
-     ShowListOfHives, ShowData, LoginView, SignUp, LogOutView
+     HistoricDataListView, ShowDataAllHives, ShowDataHiverOne, ShowDataHiverTwo, ShowDataHiverThree, ShowDataHiverFour, LoginView, SignUp, LogOutView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,8 +29,14 @@ urlpatterns = [
     url(r'^listOfHives/$', HiveList.as_view(), name='hive-list'),
     url(r'^deleteHive/(?P<pk>(\d)+)$', DeleteHiveView.as_view(), name="delete-hive"),
     url(r'^displayHives/$', AddDataDisplayHives.as_view(), name="display-hives"),
-    url(r'^historicData/$', ShowListOfHives.as_view(), name="show-hive-list"),
-    url(r'^historicData/(?P<num>(\d)+)/$', ShowData.as_view(), name="show-data"),
+    url(r'^historicData/$', HistoricDataListView.as_view(), name="show-hive-list"),
+    #How data
+    url(r'^historicData/(?P<num>(\d)+)/$', ShowDataAllHives.as_view(), name="show-data"),
+    url(r'^historicData/(?P<num>(\d)+)/hiver1/$', ShowDataHiverOne.as_view(), name="show-data"),
+    url(r'^historicData/(?P<num>(\d)+)/hiver2/$', ShowDataHiverTwo.as_view(), name="show-data"),
+    url(r'^historicData/(?P<num>(\d)+)/hiver3/$', ShowDataHiverThree.as_view(), name="show-data"),
+    url(r'^historicData/(?P<num>(\d)+)/hiver4/$', ShowDataHiverFour.as_view(), name="show-data"),
+    #Add data
     url(r'^addHivesData/(?P<num>(\d)+)/hiver1/$', AddDataHiveOneView.as_view(), name="hive-data-one-add"),
     url(r'^addHivesData/(?P<num>(\d)+)/hiver2/$', AddDataHiveTwoView.as_view(), name="hive-data-two-add"),
     url(r'^addHivesData/(?P<num>(\d)+)/hiver3/$', AddDataHiveThreeView.as_view(), name="hive-data-three-add"),

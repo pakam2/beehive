@@ -192,7 +192,7 @@ class AddDataHiveFourView(LoginRequiredMixin, View):
             return render_to_response('my_template.html', {'form': form})
 
 
-class ShowListOfHives(LoginRequiredMixin, View):
+class HistoricDataListView(LoginRequiredMixin, View):
 
     #displays a list of hives
     #In this view you can choose a hive and see the statistics
@@ -201,9 +201,26 @@ class ShowListOfHives(LoginRequiredMixin, View):
         return render(request, 'historic_data.html', {'ctx':ctx})
 
 
-class ShowData(LoginRequiredMixin, View):
+class ShowDataAllHives(LoginRequiredMixin, View):
 
     def get(self, request, num):
         #Query gets all data from a chosen hive
         dataOfHive = FirstHiveDataModel.objects.all().filter(hive_id=num)
         return render(request, 'show_data.html', {'hive_id': num, 'dataOfHive': dataOfHive})
+
+class ShowDataHiverOne(LoginRequiredMixin, View):
+
+    def get(self, request, num):
+        hiverOneData = FirstHiveDataModel.objects.all().filter(hive_id=num, owner=request.user.id)
+        print(hiverOneData)
+        return render(request, 'historic_data_hiver_one.html', {'form':hiverOneData})
+
+class ShowDataHiverTwo(LoginRequiredMixin, View):
+    pass
+
+class ShowDataHiverThree(LoginRequiredMixin, View):
+    pass
+
+class ShowDataHiverFour(LoginRequiredMixin, View):
+    pass
+
