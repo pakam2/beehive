@@ -1,1 +1,1 @@
-secret_key_for_django = 'test'
+secret_key_for_django = ''
