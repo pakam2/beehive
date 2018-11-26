@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Miodnia 2{% endblock %}
+{% block body %}
+<style>
+table, th, td {
+    border:1px solid black;
+
+}
+</style>
+<div class="app-body-wrapper">
+    <h1>Miodnia 2</h1>
+
+    <table>
+
+        {% include 'include\view_data_tabs.html' %}
+        
+        <tr><td>Data</td><td colspan="4">Ramka 1</td><td colspan="4">Ramka 2</td><td colspan="4">Ramka 3</td><td colspan="4">Ramka 4</td><td colspan="4">Ramka 5</td> <td colspan="4">Ramka 6</td> <td colspan="4">Ramka 7</td colspan="4"> <td colspan="4">Ramka 8</td><td colspan="4">Ramka 9</td><td colspan="4">Ramka 10</td></tr>
+        {% for hiveTwo in form %}
+        <tr><td>{{hiveTwo.addDate}}</td>
+            <td>{{hiveTwo.first_frame_honey}}</td><td>{{hiveTwo.first_frame_speck}}</td><td>{{hiveTwo.first_frame_beebread}}</td><td>{{hiveTwo.first_frame_worm}}</td>
+            <td>{{hiveTwo.second_frame_honey}}</td><td>{{hiveTwo.second_frame_speck}}</td><td>{{hiveTwo.second_frame_beebread}}</td><td>{{hiveTwo.second_frame_worm}}</td>
+            <td>{{hiveTwo.third_frame_honey}}</td><td>{{hiveTwo.third_frame_speck}}</td><td>{{hiveTwo.third_frame_beebread}}</td><td>{{hiveTwo.third_frame_worm}}</td>
+            <td>{{hiveTwo.fourth_frame_honey}}</td><td>{{hiveTwo.fourth_frame_speck}}</td><td>{{hiveTwo.fourth_frame_beebread}}</td><td>{{hiveTwo.fourth_frame_worm}}</td>
+            <td>{{hiveTwo.fifth_frame_honey}}</td><td>{{hiveTwo.fifth_frame_speck}}</td><td>{{hiveTwo.fifth_frame_beebread}}</td><td>{{hiveTwo.fifth_frame_worm}}</td>
+            <td>{{hiveTwo.sixth_frame_honey}}</td><td>{{hiveTwo.sixth_frame_speck}}</td><td>{{hiveTwo.sixth_frame_beebread}}</td><td>{{hiveTwo.sixth_frame_worm}}</td>
+            <td>{{hiveTwo.seventh_frame_honey}}</td><td>{{hiveTwo.seventh_frame_speck}}</td><td>{{hiveTwo.seventh_frame_beebread}}</td><td>{{hiveTwo.seventh_frame_worm}}</td>
+            <td>{{hiveTwo.eight_frame_honey}}</td><td>{{hiveTwo.eight_frame_speck}}</td><td>{{hiveTwo.eight_frame_beebread}}</td><td>{{hiveTwo.eight_frame_worm}}</td>
+            <td>{{hiveTwo.ninth_frame_honey}}</td><td>{{hiveTwo.ninth_frame_speck}}</td><td>{{hiveTwo.ninth_frame_beebread}}</td><td>{{hiveTwo.ninth_frame_worm}}</td>
+            <td>{{hiveTwo.tenth_frame_honey}}</td><td>{{hiveTwo.tenth_frame_speck}}</td><td>{{hiveTwo.tenth_frame_beebread}}</td><td>{{hiveTwo.tenth_frame_worm}}</td>
+
+
+        </tr>   
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

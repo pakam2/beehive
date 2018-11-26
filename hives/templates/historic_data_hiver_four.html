@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Miodnia 4{% endblock %}
+{% block body %}
+<style>
+table, th, td {
+    border:1px solid black;
+
+}
+</style>
+<div class="app-body-wrapper">
+    <h1>Miodnia 4</h1>
+    <table>
+
+{% include 'include\view_data_tabs.html' %}
+
+        <tr><td>Data</td><td colspan="4">Ramka 1</td><td colspan="4">Ramka 2</td><td colspan="4">Ramka 3</td><td colspan="4">Ramka 4</td><td colspan="4">Ramka 5</td> <td colspan="4">Ramka 6</td> <td colspan="4">Ramka 7</td colspan="4"> <td colspan="4">Ramka 8</td><td colspan="4">Ramka 9</td><td colspan="4">Ramka 10</td></tr>
+        {% for hiveFour in form %}
+        <tr><td>{{hiveFour.addDate}}</td>
+            <td>{{hiveFour.first_frame_honey}}</td><td>{{hiveFour.first_frame_speck}}</td><td>{{hiveFour.first_frame_beebread}}</td><td>{{hiveFour.first_frame_worm}}</td>
+            <td>{{hiveFour.second_frame_honey}}</td><td>{{hiveFour.second_frame_speck}}</td><td>{{hiveFour.second_frame_beebread}}</td><td>{{hiveFour.second_frame_worm}}</td>
+            <td>{{hiveFour.third_frame_honey}}</td><td>{{hiveFour.third_frame_speck}}</td><td>{{hiveFour.third_frame_beebread}}</td><td>{{hiveFour.third_frame_worm}}</td>
+            <td>{{hiveFour.fourth_frame_honey}}</td><td>{{hiveFour.fourth_frame_speck}}</td><td>{{hiveFour.fourth_frame_beebread}}</td><td>{{hiveFour.fourth_frame_worm}}</td>
+            <td>{{hiveFour.fifth_frame_honey}}</td><td>{{hiveFour.fifth_frame_speck}}</td><td>{{hiveFour.fifth_frame_beebread}}</td><td>{{hiveFour.fifth_frame_worm}}</td>
+            <td>{{hiveFour.sixth_frame_honey}}</td><td>{{hiveFour.sixth_frame_speck}}</td><td>{{hiveFour.sixth_frame_beebread}}</td><td>{{hiveFour.sixth_frame_worm}}</td>
+            <td>{{hiveFour.seventh_frame_honey}}</td><td>{{hiveFour.seventh_frame_speck}}</td><td>{{hiveFour.seventh_frame_beebread}}</td><td>{{hiveFour.seventh_frame_worm}}</td>
+            <td>{{hiveFour.eight_frame_honey}}</td><td>{{hiveFour.eight_frame_speck}}</td><td>{{hiveFour.eight_frame_beebread}}</td><td>{{hiveFour.eight_frame_worm}}</td>
+            <td>{{hiveFour.ninth_frame_honey}}</td><td>{{hiveFour.ninth_frame_speck}}</td><td>{{hiveFour.ninth_frame_beebread}}</td><td>{{hiveFour.ninth_frame_worm}}</td>
+            <td>{{hiveFour.tenth_frame_honey}}</td><td>{{hiveFour.tenth_frame_speck}}</td><td>{{hiveFour.tenth_frame_beebread}}</td><td>{{hiveFour.tenth_frame_worm}}</td>
+
+
+        </tr>   
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

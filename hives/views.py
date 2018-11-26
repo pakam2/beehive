@@ -4,7 +4,7 @@ from django.views import View
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from hives.forms import AddHiveForm, HiveDataFormOne, HiveDataFormTwo, HiveDataFormThree, HiveDataFormFour, SignInForm, MySignUpForm
-from hives.models import HiveModel, FirstHiveDataModel
+from hives.models import HiveModel, FirstHiveDataModel, SecondHiveDataModel, ThirdHiveDataModel, FourthHiveDataModel
 from django.db.models import Sum, Max, Count
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -82,7 +82,7 @@ class AddNewHiveView(LoginRequiredMixin, View):
             return redirect('/main')
         else:
             return HttpResponse("Ul o tym numerze już istnieje")
-1
+
 
 class HiveList(LoginRequiredMixin, View):
 
@@ -213,14 +213,23 @@ class ShowDataHiverOne(LoginRequiredMixin, View):
     def get(self, request, num):
         hiverOneData = FirstHiveDataModel.objects.all().filter(hive_id=num, owner=request.user.id)
         print(hiverOneData)
-        return render(request, 'historic_data_hiver_one.html', {'form':hiverOneData})
+        return render(request, 'historic_data_hiver_one.html', {'form':hiverOneData, 'hive_id': num})
 
 class ShowDataHiverTwo(LoginRequiredMixin, View):
-    pass
+
+    def get(self, request, num):
+        hiverTwoData = SecondHiveDataModel.objects.all().filter(hive_id=num, owner=request.user.id)
+        return render(request, 'historic_data_hiver_two.html', {'form': hiverTwoData, 'hive_id':num})
 
 class ShowDataHiverThree(LoginRequiredMixin, View):
-    pass
+
+    def get(self, request, num):
+        hiverThreeData = ThirdHiveDataModel.objects.all().filter(hive_id=num, owner=request.user.id)
+        return render(request, 'historic_data_hiver_three.html', {'form':hiverThreeData, 'hive_id':num})
+
 
 class ShowDataHiverFour(LoginRequiredMixin, View):
-    pass
 
+    def get(self, request, num):
+        hiverFourData = FourthHiveDataModel.objects.all().filter(hive_id=num, owner=request.user.id)
+        return render(request, 'historic_data_hiver_four.html', {'form':hiverFourData, 'hive_id':num})
