@@ -6,7 +6,17 @@
 	<h1>Sign up</h1>
 	<div class="app-body">
 		<form action="signup/" method="POST">
-			{{form}}
+			<table>
+			{% for x in form %}
+			<tr><td>{%if x.label == 'Password1' %}
+					Password
+					{% else %}
+						{{x.label}}
+					{% endif %}
+			
+			</td><td>{{x}}</td></tr>
+			{% endfor %}
+			</table>
 			{% csrf_token %}
 			<input type="submit" value="Rejestruj">
 		</form>
