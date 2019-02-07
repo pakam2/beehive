@@ -276,3 +276,40 @@ html, body {
 
 
 }
+
+/* Responsive table */
+.table-con {
+    overflow-x:auto;
+    
+}
+/* Result data table styling */
+table.result-data {
+
+    width:100%;
+    border:1px solid black;
+    border-collapse:collapse;
+    background-color: #FFE575;
+}
+table.result-data th{
+    padding-top:8px;
+    padding-bottom:8px;
+    font-weight: bold;
+    border:1px solid black;
+}
+table.result-data td{
+    border:1px solid black;
+    padding-top:5px;
+    padding-bottom:5px;
+    
+}
+table.result-data tr:nth-child(even){
+    background-color: #ccc;
+}
+table.result-data tr:hover:not(.table-header){
+    background-color: #EDEEEE;
+}
+a {
+    text-decoration:none;
+    /* display:block;
+    border:1px solid black; */
+}

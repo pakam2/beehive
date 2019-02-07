@@ -10,11 +10,11 @@ table, th, td {
 <div class="app-body-wrapper">
     <h1>Miodnia 2</h1>
 
-    <table>
-
         {% include 'include\view_data_tabs.html' %}
-        
-        <tr><td>Data</td><td colspan="4">Ramka 1</td><td colspan="4">Ramka 2</td><td colspan="4">Ramka 3</td><td colspan="4">Ramka 4</td><td colspan="4">Ramka 5</td> <td colspan="4">Ramka 6</td> <td colspan="4">Ramka 7</td colspan="4"> <td colspan="4">Ramka 8</td><td colspan="4">Ramka 9</td><td colspan="4">Ramka 10</td></tr>
+        <div class="table-con">    
+        <br>
+        <table class='result-data'>
+        <tr class="table-header"><th>Data</th><th colspan="4">Ramka 1</th><th colspan="4">Ramka 2</th><th colspan="4">Ramka 3</th><th colspan="4">Ramka 4</th><th colspan="4">Ramka 5</th> <th colspan="4">Ramka 6</th> <th colspan="4">Ramka 7</th colspan="4"> <th colspan="4">Ramka 8</th><th colspan="4">Ramka 9</th><th colspan="4">Ramka 10</th></tr>
         {% for hiveTwo in form %}
         <tr><td>{{hiveTwo.addDate}}</td>
             <td>{{hiveTwo.first_frame_honey}}</td><td>{{hiveTwo.first_frame_speck}}</td><td>{{hiveTwo.first_frame_beebread}}</td><td>{{hiveTwo.first_frame_worm}}</td>

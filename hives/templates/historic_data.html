@@ -6,7 +6,11 @@
   <div class="app-body">
     <br> {% for hive in ctx %}
     <a href="/historicData/{{hive.numberOfHive}}/hiver1/">Ul nr {{hive.numberOfHive}}</a>
-    <br> {% endfor %}
+    <br>
+    {% endfor %}
+    
+    <br> 
+    <a href="/main" class="back-to-menu">Powrót do menu</a> 
   </div>
 </div>
 {% endblock %}
