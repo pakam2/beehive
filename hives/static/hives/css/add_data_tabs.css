@@ -1,10 +1,16 @@
 .slidecontainer {
     width: 100%;
+    line-height:5px;
+    height:15px;
+    vertical-align: middle;
 }
-
+.discription{
+    display: inline-block;
+    transform: translate(0px, -5px);
+}
 .slider {
     -webkit-appearance: none;
-    width: 100%;
+    width: 80%;
     height: 25px;
     background: #d3d3d3;
     outline: none;
@@ -25,25 +31,12 @@
     background: #4CAF50;
     cursor: pointer;
 }
-
-/* .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #4CAF50;
-    cursor: pointer;
-} */
 .container {
    overflow: hidden;
 }
 
 .filterDiv {
-   /* float: left; */
-   /* background-color: #2196F3;
-   color: #ffffff; */
-   /* width: 100px; */
-   /* line-height: 100px;
-   text-align: center; */
-   /* margin: 2px; */
+  
    display: none; /* Hidden by default */
 }
 
